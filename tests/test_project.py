@@ -8,6 +8,7 @@ Students should add at least 3 meaningful tests of their own.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -186,3 +187,38 @@ def test_shortest_path_unreachable_returns_empty_list():
     graph = disconnected_graph()
 
     assert shortest_path(graph, "A", "Y") == []
+
+
+# ---------------------------------------------------------------------------
+# Custom tests (3 required)
+# ---------------------------------------------------------------------------
+
+def test_village_map_loads_and_has_correct_size():
+    """Custom 1: the actual village map loads with exactly 8 nodes."""
+    data_path = Path(__file__).parent.parent / "data" / "map.json"
+    graph = load_graph(str(data_path))
+    assert len(graph) == 7
+
+
+def test_village_map_is_undirected():
+    """Custom 2: every edge A->B has a matching B->A with the same weight."""
+    data_path = Path(__file__).parent.parent / "data" / "map.json"
+    graph = load_graph(str(data_path))
+    for node, neighbors in graph.items():
+        for neighbor, weight in neighbors.items():
+            assert node in graph[neighbor], (
+                f"Missing reverse edge '{neighbor}' -> '{node}'"
+            )
+            assert graph[neighbor][node] == weight, (
+                f"Weight mismatch on '{neighbor}' -> '{node}'"
+            )
+
+
+def test_shortest_path_cost_matches_dijkstra():
+    """Custom 3: sum of edge weights along the path equals the dijkstra distance."""
+    graph = sample_graph()
+    start, target = "A", "Z"
+    path = shortest_path(graph, start, target)
+    dists = dijkstra_distances(graph, start)
+    path_cost = sum(graph[path[i]][path[i + 1]] for i in range(len(path) - 1))
+    assert path_cost == dists[target]

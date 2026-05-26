@@ -1,26 +1,36 @@
 {
-  "Gate": {
-    "Food Court": 4,
-    "Main Stage": 7
-  },
-  "Food Court": {
-    "Gate": 4,
-    "Rest Area": 3
-  },
-  "Main Stage": {
-    "Gate": 7,
-    "First Aid": 2
-  },
-  "Rest Area": {
-    "Food Court": 3,
-    "Game Booth": 5
-  },
-  "First Aid": {
-    "Main Stage": 2,
-    "Game Booth": 6
-  },
-  "Game Booth": {
-    "Rest Area": 5,
-    "First Aid": 6
-  }
+    "Village Gate": {
+        "Blacksmith": 5,
+        "Market Square": 3
+    },
+    "Blacksmith": {
+        "Village Gate": 5,
+        "Temple": 7,
+        "Town Hall": 6
+    },
+    "Market Square": {
+        "Village Gate": 3,
+        "Inn": 2,
+        "Town Hall": 4
+    },
+    "Inn": {
+        "Market Square": 2,
+        "Wizard Tower": 5
+    },
+    "Temple": {
+        "Blacksmith": 7,
+        "Town Hall": 4,
+        "Wizard Tower": 8
+    },
+    "Town Hall": {
+        "Blacksmith": 6,
+        "Market Square": 4,
+        "Temple": 4,
+        "Wizard Tower": 3
+    },
+    "Wizard Tower": {
+        "Inn": 5,
+        "Temple": 8,
+        "Town Hall": 3
+    }
 }
